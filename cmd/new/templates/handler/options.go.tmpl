@@ -1,0 +1,20 @@
+package handler
+
+import (
+	"github.com/micro/go-micro/v2/server"
+	pb "{{.Namespace}}/{{.Name}}/proto"
+)
+
+// Options represents handler options
+type Options struct {
+	ServiceName     string
+}
+
+// Register will register service handler
+func Register(s server.Server, o Options) error {
+	err := pb.RegisterGreeterHandler(s, &service{id: o.ServiceName})
+	if err != nil {
+		return err
+	}
+	return nil
+}

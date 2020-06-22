@@ -1,0 +1,24 @@
+package handler
+
+import (
+	"github.com/micro/go-micro/v2/errors"
+)
+
+// Errors represents user service errors
+var (
+	errInvalid = errors.Error{Code: 10000, Detail: "Invalid args"}
+)
+
+// InternalServerError represents internal server error
+func (s *service) InternalServerError(err string) error {
+	return errors.InternalServerError(s.id, err)
+}
+
+// NewError return a new micro service error
+func (s *service) NewError(err errors.Error) error {
+	return &errors.Error{
+		Id:     s.id,
+		Code:   err.Code,
+		Detail: err.Detail,
+	}
+}

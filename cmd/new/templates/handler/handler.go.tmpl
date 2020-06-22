@@ -1,0 +1,16 @@
+package handler
+
+import (
+	"context"
+
+	pb "{{.Namespace}}/{{.Name}}/proto"
+)
+
+type service struct {
+	id  string
+}
+
+func (s *service) SayHello(ctx context.Context, in *pb.HelloRequest, out *pb.HelloReply) error {
+	out.Message = in.Message
+	return nil
+}
